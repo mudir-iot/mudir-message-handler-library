@@ -1,0 +1,48 @@
+name: Mudir CI
+
+on:
+  push:
+    branches: 
+    - main
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Fetch all history for all tags and branches
+      run: git fetch --all --tags
+    - name: Configure
+      run: ./configure.sh
+    - name: Build Libraries
+      run: make 
+    - name: Perform Unit Test
+      run: make test
+    - name: Upload test results XML
+      uses: actions/upload-artifact@v2
+      with:
+        name: Raw-XML-Results
+        path: '**/*.xml'
+    - name: Upload test results HTML
+      uses: actions/upload-artifact@v2
+      with:
+        name: Raw-HTML-Results
+        path: '**/*.html'
+    - name: Upload coverage to CodeCov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        flags: unittests
+    - name: Fail if unit test failed
+      run: ./failIfUnitTestFailed.sh
+    - name: Perform final build
+      run: make
+#    - name: make distcheck
+#      run: make distcheck
+      
