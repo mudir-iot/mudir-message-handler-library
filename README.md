@@ -6,10 +6,14 @@
 
 The library to handle messages between Mudir manager and devices (Sensors and Actuators).
 
-## Installation Instructions
+## Installation Instructions for Developers
+
+The following listing lists the commands to install components needed to run and build the components on Ubuntu (or Debian distros).
 
 ```shell
 sudo apt install libcunit1 libcunit1-doc libcunit1-dev
 sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 sudo apt install xsltproc
 ```
+
+Common components such as `gcc`, `gcov`, `make` and `libtool` are assumed to be installed on the developer machine. If not, then these must also be installed. 
