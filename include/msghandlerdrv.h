@@ -22,6 +22,11 @@ extern "C" {
  * <p>This library lists the different operations that are meant to be 
  * used by the driver modules. This library MUST be used in conjunction
  * with common.h.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
  */
 
 /* #region __driver_message_types__ */
