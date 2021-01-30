@@ -8,6 +8,7 @@ xsltproc --nodtdattr -o libmudirmsghandlerdrvTest-Results.html CUnit-Run.xsl lib
 xsltproc --nodtdattr -o libmudirmsghandlerdrvTest-Listing.html CUnit-List.xsl libmudirmsghandlerdrvTest-Listing.xml
 mv testoutput/obj1/*.gc* src
 gcov src/* -m
+mv *.gcov src/
 
 if [ $retval -ne 0 ]
 then

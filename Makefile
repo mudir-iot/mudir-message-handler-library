@@ -111,6 +111,7 @@ clean:
 	@-rm *.html 2> /dev/null || true
 	@-rm src/*.gcno 2> /dev/null || true
 	@-rm src/*.gcda 2> /dev/null || true
+	@-rm src/*.gcov 2> /dev/null || true
 	@-rm *.gcov 2> /dev/null || true
 	@-rm -f unittestfail 2> /dev/null || true
 	@printf '$(PROJPFX)Clean up complete.\n'
