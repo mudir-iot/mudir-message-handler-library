@@ -819,5 +819,22 @@ void mudir_drvmsg_ack_mode_get_test_base_empty_message()
 
 void mudir_drvmsg_ack_mode_get_test_base()
 {
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
   
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DRIVER_REGISTER_ACK), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_ack_mode_set(message, MUDIR_DRIVERMSG_ACK_MODE_IPC), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_ack_mode_get(message), MUDIR_DRIVERMSG_ACK_MODE_IPC);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_ack_mode_get_test_base"), MUDIR_SUCCESS);
 }
