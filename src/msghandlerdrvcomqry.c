@@ -214,7 +214,7 @@ struct mudir_driver_message_devopts *optsComQrymsg;
   for (int i = comqrymessage->num_opts_; i < count; i++)
   {
     optsComQrymsg[i].key_[0] = '\0';
-    memset(optsComQrymsg[i].value_, 0, MUDIR_MAX_NAME_LEN);
+    memset(optsComQrymsg[i].value_, 0, MUDIR_MAX_BUFFER_SIZE);
     optsComQrymsg[i].type_ = MUDIR_DRIVERMSG_RETURN_TYPE_UNKNOWN;
   }
 
@@ -231,7 +231,8 @@ int mudir_drvmsg_comqry_opts_count_get(
   if (NULL == message)
     return -1;
   
-  if (MUDIR_DRIVERMSG_TYPE_DRIVER_REGISTER != message->message_type_)
+  if (MUDIR_DRIVERMSG_TYPE_DEVICE_QUERY != message->message_type_ && 
+      MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND != message->message_type_)
     return -1;
 
   if (NULL == message->message)

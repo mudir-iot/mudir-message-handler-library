@@ -76,7 +76,7 @@ struct mudir_driver_message_ack
 struct mudir_driver_message_devopts
 {
   char                                  key_[MUDIR_MAX_NAME_LEN];
-  MUDIR_BYTE                            value_[MUDIR_MAX_NAME_LEN];
+  MUDIR_BYTE                            value_[MUDIR_MAX_BUFFER_SIZE];
   mudir_drivermsg_data_type             type_;
 };
 

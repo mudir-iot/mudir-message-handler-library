@@ -1,0 +1,77 @@
+#ifndef   __MSGHANDLERDRVCOMQRY_TEST_H__
+#define   __MSGHANDLERDRVCOMQRY_TEST_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Test Suite Initializer */ 
+int msghandlerdrvcomqry_test_init();
+
+void mudir_drvmsg_comqry_init_test_null_check();
+
+void mudir_drvmsg_comqry_clean_test_null_check();
+void mudir_drvmsg_comqry_clean_test_null_msg_check();
+
+void mudir_drvmsg_comqry_driver_name_set_test_null_check();
+void mudir_drvmsg_comqry_driver_name_set_test_null_param_check();
+void mudir_drvmsg_comqry_driver_name_set_test_message_type_check();
+void mudir_drvmsg_comqry_driver_name_set_test_null_ackmessage_check();
+void mudir_drvmsg_comqry_driver_name_set_test_base_check();
+
+void mudir_drvmsg_comqry_driver_name_get_test_null_check();
+void mudir_drvmsg_comqry_driver_name_get_test_message_type_check();
+void mudir_drvmsg_comqry_driver_name_get_test_null_ackmessage_check();
+void mudir_drvmsg_comqry_driver_name_get_test_base_empty_string_check();
+void mudir_drvmsg_comqry_driver_name_get_test_base_check();
+
+void mudir_drvmsg_comqry_device_name_set_test_null_check();
+void mudir_drvmsg_comqry_device_name_set_test_null_param_check();
+void mudir_drvmsg_comqry_device_name_set_test_message_type_check();
+void mudir_drvmsg_comqry_device_name_set_test_null_ackmessage_check();
+void mudir_drvmsg_comqry_device_name_set_test_base_check();
+
+void mudir_drvmsg_comqry_device_name_get_test_null_check();
+void mudir_drvmsg_comqry_device_name_get_test_message_type_check();
+void mudir_drvmsg_comqry_device_name_get_test_null_ackmessage_check();
+void mudir_drvmsg_comqry_device_name_get_test_base_empty_string_check();
+void mudir_drvmsg_comqry_device_name_get_test_base_check();
+
+void mudir_drvmsg_comqry_opts_count_set_test_null_check();
+void mudir_drvmsg_comqry_opts_count_set_test_zero_count_check();
+void mudir_drvmsg_comqry_opts_count_set_test_negative_count_check();
+void mudir_drvmsg_comqry_opts_count_set_test_message_type_check();
+void mudir_drvmsg_comqry_opts_count_set_test_null_comqrymessage_check();
+void mudir_drvmsg_comqry_opts_count_set_test_base();
+void mudir_drvmsg_comqry_opts_count_set_test_base_realloc_check_increase();
+void mudir_drvmsg_comqry_opts_count_set_test_base_realloc_check_decrease();
+
+void mudir_drvmsg_comqry_opts_count_get_test_null_check();
+void mudir_drvmsg_comqry_opts_count_get_test_message_type_check();
+void mudir_drvmsg_comqry_opts_count_get_test_null_comqrymessage_check();
+void mudir_drvmsg_comqry_opts_count_get_test_base_empty_message();
+void mudir_drvmsg_comqry_opts_count_get_test_base();
+
+void mudir_drvmsg_comqry_opts_key_set_test_null_check();
+void mudir_drvmsg_comqry_opts_key_set_test_null_param_check();
+void mudir_drvmsg_comqry_opts_key_set_test_message_type_check();
+void mudir_drvmsg_comqry_opts_key_set_test_null_comqrymessage_check();
+void mudir_drvmsg_comqry_opts_key_set_test_index_lowerbound_check();
+void mudir_drvmsg_comqry_opts_key_set_test_index_upperbound_check();
+void mudir_drvmsg_comqry_opts_key_set_test_null_comqryoptsmessage_check();
+void mudir_drvmsg_comqry_opts_key_set_test_base_check();
+
+void mudir_drvmsg_comqry_opts_key_get_test_null_check();
+void mudir_drvmsg_comqry_opts_key_get_test_message_type_check();
+void mudir_drvmsg_comqry_opts_key_get_test_null_comqrymessage_check();
+void mudir_drvmsg_comqry_opts_key_get_test_index_lowerbound_check();
+void mudir_drvmsg_comqry_opts_key_get_test_index_upperbound_check();
+void mudir_drvmsg_comqry_opts_key_get_test_null_comqryoptsmessage_check();
+void mudir_drvmsg_comqry_opts_key_get_test_base_empty_string();
+void mudir_drvmsg_comqry_opts_key_get_test_base();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __MSGHANDLERDRVCOMQRY_TEST_H__ */

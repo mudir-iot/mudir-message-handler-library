@@ -10,6 +10,7 @@
 #include "msghandlerdrvreg.test.h"
 #include "msghandlerdrvack.test.h"
 #include "msghandlerdrvrep.test.h"
+#include "msghandlerdrvcomqry.test.h"
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
@@ -40,6 +41,7 @@ int addSuites()
   if (MUDIR_ERROR == msghandlerdrvreg_test_init()) { return MUDIR_ERROR; }
   if (MUDIR_ERROR == msghandlerdrvack_test_init()) { return MUDIR_ERROR; }
   if (MUDIR_ERROR == msghandlerdrvrep_test_init()) { return MUDIR_ERROR; }
+  if (MUDIR_ERROR == msghandlerdrvcomqry_test_init()) { return MUDIR_ERROR; }
 
   return MUDIR_SUCCESS;
 }
