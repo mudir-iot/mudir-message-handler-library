@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <mcheck.h>
+#include <stdbool.h>
 #include "common.h"
 #include "common_test.h"
 #include "msghandlerdrv.h"
@@ -66,7 +67,7 @@ int msghandlerdrvcomqry_test_init()
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: NULL message structure check", mudir_drvmsg_comqry_opts_key_set_test_null_comqrymessage_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: Index check - Lower bound", mudir_drvmsg_comqry_opts_key_set_test_index_lowerbound_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: Index check - Upper bound", mudir_drvmsg_comqry_opts_key_set_test_index_upperbound_check);
-  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: NULL capabilities structure check", mudir_drvmsg_comqry_opts_key_set_test_null_comqryoptsmessage_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: NULL options structure check", mudir_drvmsg_comqry_opts_key_set_test_null_comqryoptsmessage_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_set: Normal operation", mudir_drvmsg_comqry_opts_key_set_test_base_check);
 
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: NULL check", mudir_drvmsg_comqry_opts_key_get_test_null_check);
@@ -74,9 +75,21 @@ int msghandlerdrvcomqry_test_init()
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: NULL message structure check", mudir_drvmsg_comqry_opts_key_get_test_null_comqrymessage_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: Index check - Lower bound", mudir_drvmsg_comqry_opts_key_get_test_index_lowerbound_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: Index check - Upper bound", mudir_drvmsg_comqry_opts_key_get_test_index_upperbound_check);
-  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: NULL capabilities structure check", mudir_drvmsg_comqry_opts_key_get_test_null_comqryoptsmessage_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: NULL options structure check", mudir_drvmsg_comqry_opts_key_get_test_null_comqryoptsmessage_check);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: Normal operation - Empty name", mudir_drvmsg_comqry_opts_key_get_test_base_empty_string);
   MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_key_get: Normal operation", mudir_drvmsg_comqry_opts_key_get_test_base);
+
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: NULL check", mudir_drvmsg_comqry_opts_value_set_test_null_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: NULL parameter check", mudir_drvmsg_comqry_opts_value_set_test_null_param_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Invalid parameter lower bound check", mudir_drvmsg_comqry_opts_value_set_test_invalid_param_lbound_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Invalid parameter upper bound check", mudir_drvmsg_comqry_opts_value_set_test_invalid_param_ubound_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Message type check", mudir_drvmsg_comqry_opts_value_set_test_message_type_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: NULL message structure check", mudir_drvmsg_comqry_opts_value_set_test_null_comqrymessage_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Index check - Lower bound", mudir_drvmsg_comqry_opts_value_set_test_index_lowerbound_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Index check - Upper bound", mudir_drvmsg_comqry_opts_value_set_test_index_upperbound_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: NULL options structure check", mudir_drvmsg_comqry_opts_value_set_test_null_comqryoptsmessage_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Normal operation - Bool", mudir_drvmsg_comqry_opts_value_set_test_base_bool_check);
+  MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_value_set: Normal operation - Integer", mudir_drvmsg_comqry_opts_value_set_test_base_int_check);
 
   // MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_valuetype_get: NULL check", mudir_drvmsg_comqry_opts_valuetype_get_test_null_check);
   // MUDIR_TEST_ADD_TEST(pSuite, "mudir_drvmsg_comqry_opts_valuetype_get: Message type check", mudir_drvmsg_comqry_opts_valuetype_get_test_message_type_check);
@@ -1092,4 +1105,246 @@ void mudir_drvmsg_comqry_opts_key_get_test_base()
 
   muntrace();
   CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_key_get_test_base"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_null_check()
+{
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(NULL, 1, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_null_param_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, NULL), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_null_param_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_invalid_param_lbound_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, -1, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_invalid_param_lbound_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_invalid_param_ubound_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, 6, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_invalid_param_ubound_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_message_type_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 1, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_message_type_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_null_comqrymessage_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  message->message_type_ = MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND;
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 1, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_null_comqrymessage_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_index_lowerbound_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_count_set(message, 1), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, -1, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_index_lowerbound_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_index_upperbound_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_count_set(message, 1), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 1, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_index_upperbound_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_null_comqryoptsmessage_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+  struct mudir_driver_message_devcomqry *comqrymessage;
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND), MUDIR_SUCCESS);
+  comqrymessage = (struct mudir_driver_message_devcomqry*)(message->message);
+  comqrymessage->num_opts_ = 1;
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, MUDIR_DRIVERMSG_RETURN_TYPE_STRING, "NULL"), MUDIR_ERROR);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_null_comqryoptsmessage_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_base_bool_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+  struct mudir_driver_message_devcomqry *comqrymessage;
+  struct mudir_driver_message_devopts *comqryoptsmsg;
+  bool   value;
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+  value = true;
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_comqry_opts_count_set(message, 1), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, MUDIR_DRIVERMSG_RETURN_TYPE_BOOL, &value), MUDIR_SUCCESS);
+  comqrymessage = (struct mudir_driver_message_devcomqry *)(message->message);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(comqrymessage);
+  comqryoptsmsg = (struct mudir_driver_message_devopts *) comqrymessage->options_;
+  CU_ASSERT_PTR_NOT_NULL_FATAL(comqryoptsmsg);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[0], 0x01);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[1], 0x00);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_base_bool_check"), MUDIR_SUCCESS);
+}
+
+void mudir_drvmsg_comqry_opts_value_set_test_base_int_check()
+{
+  mudir_driver_message message;
+  char mTraceFile[PATH_MAX];
+  struct mudir_driver_message_devcomqry *comqrymessage;
+  struct mudir_driver_message_devopts *comqryoptsmsg;
+  long   value;
+
+  generateTempTraceFileName(mTraceFile);
+  mtrace();
+  
+  message = NULL;
+  value = 1295407178; 
+  /* Hex 4D36584A */
+
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_initialize(&message, MUDIR_DRIVERMSG_VERSION_1_0), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(message);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_messagetype_set(message, MUDIR_DRIVERMSG_TYPE_DEVICE_COMMAND), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_comqry_opts_count_set(message, 1), MUDIR_SUCCESS);
+  CU_ASSERT_EQUAL(mudir_drvmsg_comqry_opts_value_set(message, 0, MUDIR_DRIVERMSG_RETURN_TYPE_INTEGER, &value), MUDIR_SUCCESS);
+  comqrymessage = (struct mudir_driver_message_devcomqry *)(message->message);
+  CU_ASSERT_PTR_NOT_NULL_FATAL(comqrymessage);
+  comqryoptsmsg = (struct mudir_driver_message_devopts *) comqrymessage->options_;
+  CU_ASSERT_PTR_NOT_NULL_FATAL(comqryoptsmsg);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[0], 0x4A);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[1], 0x58);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[2], 0x36);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[3], 0x4D);
+  CU_ASSERT_EQUAL(comqryoptsmsg[0].value_[4], 0x00);
+  CU_ASSERT_EQUAL_FATAL(mudir_drvmsg_free(&message), MUDIR_SUCCESS);
+  CU_ASSERT_PTR_NULL_FATAL(message);
+
+  muntrace();
+  CU_ASSERT_EQUAL(confirmNoMemoryLeakage(mTraceFile, "mudir_drvmsg_comqry_opts_value_set_test_base_int_check"), MUDIR_SUCCESS);
 }

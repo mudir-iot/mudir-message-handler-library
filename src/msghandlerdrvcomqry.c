@@ -341,7 +341,7 @@ int mudir_drvmsg_comqry_opts_value_set(
   switch(type)
   {
     case MUDIR_DRIVERMSG_RETURN_TYPE_BOOL:
-      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_NAME_LEN);
+      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_BUFFER_SIZE);
       if (*((bool *) value) == true)
         comqrymessage->options_[index].value_[0] = 1;
       
@@ -349,7 +349,7 @@ int mudir_drvmsg_comqry_opts_value_set(
       break;
 
     case MUDIR_DRIVERMSG_RETURN_TYPE_INTEGER:
-      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_NAME_LEN);
+      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_BUFFER_SIZE);
 
       long correctedValue = htonl(*((long *) value));
       comqrymessage->options_[index].value_[0] = (correctedValue >> 24) & 0xFF;
@@ -361,7 +361,7 @@ int mudir_drvmsg_comqry_opts_value_set(
       break;
 
     case MUDIR_DRIVERMSG_RETURN_TYPE_FLOAT:
-      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_NAME_LEN);
+      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_BUFFER_SIZE);
 
       long mant = 0;
       int exp = 0;
@@ -382,8 +382,8 @@ int mudir_drvmsg_comqry_opts_value_set(
 
     case MUDIR_DRIVERMSG_RETURN_TYPE_STRING:
     case MUDIR_DRIVERMSG_RETURN_TYPE_JSON:
-      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_NAME_LEN);
-      strncpy((char *) comqrymessage->options_[index].value_, (const char *) value, MUDIR_MAX_NAME_LEN);
+      memset(comqrymessage->options_[index].value_, 0, MUDIR_MAX_BUFFER_SIZE);
+      strncpy((char *) comqrymessage->options_[index].value_, (const char *) value, MUDIR_MAX_BUFFER_SIZE);
 
       comqrymessage->options_[index].type_ = type;
       break;

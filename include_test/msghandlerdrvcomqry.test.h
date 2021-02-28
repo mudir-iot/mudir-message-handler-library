@@ -70,6 +70,18 @@ void mudir_drvmsg_comqry_opts_key_get_test_null_comqryoptsmessage_check();
 void mudir_drvmsg_comqry_opts_key_get_test_base_empty_string();
 void mudir_drvmsg_comqry_opts_key_get_test_base();
 
+void mudir_drvmsg_comqry_opts_value_set_test_null_check();
+void mudir_drvmsg_comqry_opts_value_set_test_null_param_check();
+void mudir_drvmsg_comqry_opts_value_set_test_invalid_param_lbound_check();
+void mudir_drvmsg_comqry_opts_value_set_test_invalid_param_ubound_check();
+void mudir_drvmsg_comqry_opts_value_set_test_message_type_check();
+void mudir_drvmsg_comqry_opts_value_set_test_null_comqrymessage_check();
+void mudir_drvmsg_comqry_opts_value_set_test_index_lowerbound_check();
+void mudir_drvmsg_comqry_opts_value_set_test_index_upperbound_check();
+void mudir_drvmsg_comqry_opts_value_set_test_null_comqryoptsmessage_check();
+void mudir_drvmsg_comqry_opts_value_set_test_base_bool_check();
+void mudir_drvmsg_comqry_opts_value_set_test_base_int_check();
+
 #ifdef __cplusplus
 }
 #endif
